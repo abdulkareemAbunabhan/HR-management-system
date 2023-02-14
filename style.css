@@ -44,13 +44,16 @@ h3{
     margin: 3px 10px ;
     color: white;
 }
-/* main{
- height: 100vh;   
-} */
 section{
     display: flex;
     margin: 20px;
     justify-content: space-around;
+}
+label{
+    margin: 20px 5px;
+}
+input{
+    margin: 20px 5px;
 }
 .active{
     background-color: #6200ff;
@@ -79,3 +82,4 @@ section{
 #accontingPage{
     height:100vh;
 }
+
