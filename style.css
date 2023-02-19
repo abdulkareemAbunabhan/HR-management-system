@@ -1,0 +1,97 @@
+:root{
+    --mainColor : #13005A ;
+    --secondaryColor1: #1C82AD;
+    --secondaryColor2 : #03C988;
+    --secondaryColor3 : #00337C;
+    --purple1 : #645CBB;
+    --purple2: #A084DC;
+    --purple3: #BFACE2;
+    --purple4: #EBC7E6;
+}
+body{
+    margin: 0;
+    background-color: var(--purple4);
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--mainColor);
+    position: fixed;
+    width: 100%;
+    align-items: center;
+    z-index: 1;
+}
+footer{
+    background-color: var(--secondaryColor3);
+    display: flex;
+    justify-content: space-around;
+}
+a {
+    margin: 5px 20px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    padding: 5px;
+    transition: backgorund 0.8s;   
+}
+p{
+    color: wheat;
+}
+h3{
+    color: wheat;
+}
+
+section{
+    display: flex;
+    margin: 20px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+label{
+    margin: 20px 5px;
+}
+input{
+    margin: 20px 5px;
+}
+span{
+    width: 20%;
+    display:flex ;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: hidden;
+    margin: 10px;
+    padding: 5px;
+}
+.active{
+    background-color: #6200ff;
+    border-radius: 15%;
+}
+.footrimg{
+    display: flex;
+    justify-content: space-between;
+}
+.footrimg img {
+    width: 20px;
+}
+#headTitle h1{
+    margin: 3px 10px ;
+    color: white;
+}
+#nav-bar{
+    display: flex;
+    padding: auto;
+    right: 3%; 
+    margin-right: 20px;
+}
+#nav-bar a:hover{
+    background-color: rgba(0, 0, 14, 0.233);
+    border-radius: 15%;
+}
+#headImg{
+    width: 100%;
+}
+#accontingPage{
+    height:100vh;
+}
+
