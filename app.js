@@ -1,24 +1,44 @@
 'use strict'
 let id , fullName , department , level , imgUrl ;
+let employeeArr = [];
+let jsonForm =[];
 document.getElementById("formElement").addEventListener("submit",function(event){
     event.preventDefault();
     fullName = document.getElementById('fullName').value;
     department = document.getElementById('department').value
     level = document.getElementById('level').value ; 
     imgUrl = document.getElementById('imgUrl').value ;
-    let newOne = new Employee("1212",fullName,department,level,imgUrl)
+    let newOne = new Employee(fullName,department,level,imgUrl);
     newOne.salary = newOne.salaryCalculate();
-    newOne.render();
+    employeeArr.push(newOne); 
+    jsonForm = JSON.stringify(employeeArr);
+    localStorage.setItem("employeeStorageArr", jsonForm);
+    render();
 })
-
-
-function Employee (id,fullName,department,level,imgUrl,salary){
-    this.id = id ;
+let ids = [];
+function genrateUniqueId (){
+    id = Math.floor(Math.random()*10000);
+    if(id < 10){
+        id = `000${id}`;
+    }else if(id <100){
+        id = `00${id}`
+    }else if (id < 1000){
+        id=`0${id}`
+    }
+    if (ids.indexOf(id) === -1){
+        ids.push(id);
+        return id;
+    }else{
+        genrateUniqueId();
+    }
+}
+function Employee (fullName,department,level,imgUrl,salary){
+    this.id = genrateUniqueId() ;
     this.fullName = fullName ;
     this.department = department ;
     this.level = level;
     this.imgUrl = imgUrl ;
-    this.salary = salary;
+    this.salary = salary || 0;
 }
 
 Employee.prototype.salaryCalculate = function (){
@@ -40,41 +60,44 @@ Employee.prototype.salaryCalculate = function (){
 Employee.prototype.netSalaryCalculate = function (salary){
     return salary*0.075
 }
-
-Employee.prototype.render = function (){
+let jsEmployeearr;
+function render(){
+    jsEmployeearr =JSON.parse(localStorage.getItem('employeeStorageArr')|| []);
+    document.getElementById('parentSection').innerHTML = '';
+    for(let index of jsEmployeearr){
         let newElement = document.createElement("span");
-        if (this.department.trim().toLowerCase()=="administration"){
+        if (index['department'].trim().toLowerCase()=="administration"){
             newElement.style.order = '1'
             newElement.style.backgroundColor = "#03C988"
-        }else if(this.department.trim().toLowerCase()=="marketing"){
+        }else if(index['department'].trim().toLowerCase()=="marketing"){
             newElement.style.order = '2'
             newElement.style.backgroundColor = "#A084DC"
-        }else if(this.department.trim().toLowerCase()=="development"){
+        }else if(index['department'].trim().toLowerCase()=="development"){
             newElement.style.order = '3'
             newElement.style.backgroundColor = "#1C82AD"
-        }else if(this.department.trim().toLowerCase()=="finance"){
+        }else if(index['department'].trim().toLowerCase()=="finance"){
             newElement.style.order = '4'
             newElement.style.backgroundColor = "#645CBB"
         }
         let idChild = document.createElement('h4');
-        let idText = document.createTextNode(`id: ${this.id}`);
+        let idText = document.createTextNode(`id: ${index['id']}`);
         idChild.appendChild(idText);
         let fullNameChild = document.createElement('h1');
-        let fullNameText = document.createTextNode(`Name: ${this.fullName}`);
+        let fullNameText = document.createTextNode(`Name: ${index['fullName']}`);
         fullNameChild.appendChild(fullNameText);
         let divElm = document.createElement('div');
         divElm.style.height = "200px"
         let imgElement = document.createElement("img")
-        imgElement.setAttribute('src',this.imgUrl);
+        imgElement.setAttribute('src',index['imgUrl']);
         divElm.appendChild(imgElement)
         let departmentChild = document.createElement('h4');
-        let departmentText = document.createTextNode(`department: ${this.department}`);
+        let departmentText = document.createTextNode(`department: ${index['department']}`);
         departmentChild.appendChild(departmentText);
         let levelElement = document.createElement('h4');
-        let levelText = document.createTextNode(`Level: ${this.level}`);
+        let levelText = document.createTextNode(`Level: ${index['level']}`);
         levelElement.appendChild(levelText);
         let salaryElement = document.createElement('h4');
-        let salaryText = document.createTextNode(`salary: ${this.salary} $`);   
+        let salaryText = document.createTextNode(`salary: ${index['salary']} $`);   
         salaryElement.appendChild(salaryText);
         imgElement.setAttribute('style','width : 200px')
         newElement.appendChild(divElm);
@@ -84,6 +107,7 @@ Employee.prototype.render = function (){
         newElement.appendChild(levelElement);
         newElement.appendChild(salaryElement);
         document.getElementById('parentSection').appendChild(newElement);
+    }
     }
     
 //  let ghazi = new Employee(1000,'Ghazi Samer',"Administration",'Senior','https://user-images.githubusercontent.com/123550658/218242175-dd03e38c-1edc-4246-8f33-8a6529babc25.jpg')
