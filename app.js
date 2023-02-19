@@ -6,14 +6,29 @@ document.getElementById("formElement").addEventListener("submit",function(event)
     department = document.getElementById('department').value
     level = document.getElementById('level').value ; 
     imgUrl = document.getElementById('imgUrl').value ;
-    let newOne = new Employee("1212",fullName,department,level,imgUrl)
+    let newOne = new Employee(fullName,department,level,imgUrl)
     newOne.salary = newOne.salaryCalculate();
     newOne.render();
 })
-
-
-function Employee (id,fullName,department,level,imgUrl,salary){
-    this.id = id ;
+let ids = [];
+function genrateUniqueId (){
+    id = Math.floor(Math.random()*10000);
+    if(id < 10){
+        id = `000${id}`;
+    }else if(id <100){
+        id = `00${id}`
+    }else if (id < 1000){
+        id=`0${id}`
+    }
+    if (ids.indexOf(id) === -1){
+        ids.push(id);
+        return id;
+    }else{
+        genrateUniqueId();
+    }
+}
+function Employee (fullName,department,level,imgUrl,salary){
+    this.id = genrateUniqueId() ;
     this.fullName = fullName ;
     this.department = department ;
     this.level = level;
