@@ -63,6 +63,15 @@ span{
     margin: 10px;
     padding: 5px;
 }
+table{
+    width: 70%;
+    border: 3px solid black;
+    margin: 2%;
+}
+td ,th{
+    border: 1px solid black;
+    text-align: center;
+}
 .active{
     background-color: #6200ff;
     border-radius: 15%;
@@ -93,5 +102,7 @@ span{
 }
 #accontingPage{
     height:100vh;
+    display: flex;
+    justify-content: center;
 }
 

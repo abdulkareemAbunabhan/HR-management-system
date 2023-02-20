@@ -1,6 +1,6 @@
 'use strict'
 let id , fullName , department , level , imgUrl ;
-let employeeArr = [];
+let employeeArr = JSON.parse(localStorage.getItem("employeeStorageArr"))
 let jsonForm =[];
 document.getElementById("formElement").addEventListener("submit",function(event){
     event.preventDefault();
@@ -17,14 +17,7 @@ document.getElementById("formElement").addEventListener("submit",function(event)
 })
 let ids = [];
 function genrateUniqueId (){
-    id = Math.floor(Math.random()*10000);
-    if(id < 10){
-        id = `000${id}`;
-    }else if(id <100){
-        id = `00${id}`
-    }else if (id < 1000){
-        id=`0${id}`
-    }
+    id = Math.floor((Math.random()*(10000-1000))+1000);
     if (ids.indexOf(id) === -1){
         ids.push(id);
         return id;
@@ -109,7 +102,8 @@ function render(){
         document.getElementById('parentSection').appendChild(newElement);
     }
     }
-    
+    render()
+
 //  let ghazi = new Employee(1000,'Ghazi Samer',"Administration",'Senior','https://user-images.githubusercontent.com/123550658/218242175-dd03e38c-1edc-4246-8f33-8a6529babc25.jpg')
 //      ghazi.salary = ghazi.salaryCalculate();
 //     ghazi.render()
