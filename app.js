@@ -1,6 +1,11 @@
 'use strict'
 let id , fullName , department , level , imgUrl ;
-let employeeArr = JSON.parse(localStorage.getItem("employeeStorageArr"))
+let employeeArr ; 
+if (localStorage.getItem('employeeStorageArr')== null){
+    employeeArr = [];
+}else{
+    employeeArr = JSON.parse(localStorage.getItem('employeeStorageArr'))
+}
 let jsonForm =[];
 document.getElementById("formElement").addEventListener("submit",function(event){
     event.preventDefault();
@@ -55,7 +60,11 @@ Employee.prototype.netSalaryCalculate = function (salary){
 }
 let jsEmployeearr;
 function render(){
-    jsEmployeearr =JSON.parse(localStorage.getItem('employeeStorageArr')|| []);
+    if (localStorage.getItem('employeeStorageArr')== null){
+        jsEmployeearr = [];
+    }else{
+        jsEmployeearr = JSON.parse(localStorage.getItem('employeeStorageArr'))
+    }
     document.getElementById('parentSection').innerHTML = '';
     for(let index of jsEmployeearr){
         let newElement = document.createElement("span");
